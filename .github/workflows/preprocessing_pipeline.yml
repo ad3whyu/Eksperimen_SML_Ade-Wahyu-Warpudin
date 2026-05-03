@@ -21,7 +21,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install pandas numpy scikit-learn; fi
 
       - name: Execute Preprocessing Script
         run: python preprocessing/automate_Ade-Wahyu-Warpudin.py
@@ -30,7 +30,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          # Menambahkan file hasil proses di folder output
-          git add preprocessing/used_car_price_dataset_extended_preprocessing/*.csv
-          # Cek jika ada perubahan, lakukan commit dan push
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update: Preprocessed Data Otomatis" && git push)
+          # Force add folder output jika baru dibuat
+          git add preprocessing/used_car_price_dataset_extended_preprocessing/ || true
+          git commit -m "Update: Preprocessed Data Otomatis" || echo "Tidak ada perubahan untuk di-commit"
+          git push
