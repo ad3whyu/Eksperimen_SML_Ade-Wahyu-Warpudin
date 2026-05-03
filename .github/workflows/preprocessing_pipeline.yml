@@ -2,12 +2,12 @@ name: ML Preprocessing Workflow Ade-Wahyu
 
 on:
   push:
-    branches: [ main ]      
-  workflow_dispatch:       
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install Dependencies
         run: |
@@ -24,7 +24,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Execute Preprocessing Script
-        run: python preprocessing/automate_Ade-Wahyu.py
+        run: python preprocessing/automate_Ade-Wahyu-Warpudin.py
 
       - name: Commit and Push Changes
         run: |
